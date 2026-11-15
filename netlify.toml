@@ -6,6 +6,13 @@
 # /static rule (assets/array.js) must come before the /ingest/* catch-all
 # (event ingestion, /decide, session recording, etc.).
 
+# Test files (tests/*.mjs) live in the repo but must not be served.
+[[redirects]]
+  from = "/tests/*"
+  to = "/404"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/ingest/static/*"
   to = "https://eu-assets.i.posthog.com/static/:splat"
