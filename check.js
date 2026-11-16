@@ -34,7 +34,7 @@
       ],
       gap: {
         why: 'The duty officer and the yard safety office need today’s open boundaries, not last week’s spreadsheet. Without a daily list, fire risk is managed from memory.',
-        how: 'The daily Fire Status sheet lists every open penetration, A-60s highlighted, with how long it has been open and who opened it.',
+        how: 'The daily Fire Status sheet lists every open penetration, A-60s highlighted, with how long it has been open and which contractor opened it.',
         link: '/#fire-status'
       }
     },
@@ -62,7 +62,7 @@
       ],
       gap: {
         why: 'A self-certified seal is only as good as the last shift’s pressure to finish. An independent check is what turns a contractor’s word into evidence.',
-        how: 'Verify rounds: a supervisor confirms or queries each seal on site. A query is a message sent inside PenLog to the contractor, who replies from their own link; query and reply stay on that penetration’s record and appear in the close-out report. No phone calls or WhatsApp threads to chase.',
+        how: 'Verify rounds: a supervisor confirms or queries each seal on site. A query is a message sent inside PenLog to the contractor, who replies from their own link; query and reply stay on that penetration’s record, and the close-out report shows each query and when it was answered. No phone calls or WhatsApp threads to chase.',
         link: '/#how-it-works'
       }
     },

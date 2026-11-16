@@ -115,3 +115,12 @@ test('copy guard: no "free", no UR Z28, no draft stops; Verify card never claims
   assert.doesNotMatch(q4.gap.how, /audit trail/i);
   assert.match(q4.gap.how, /inside PenLog/);
 });
+
+test('cards claim only what the product does (review 2026-11-16)', () => {
+  const how = (id) => C.QUESTIONS.find((q) => q.id === id).gap.how;
+  // The Fire Status sheet names the contractor company, not the person.
+  assert.match(how('q2'), /which contractor opened it/);
+  // The close-out report summarises each query and when it was answered; it does not reprint the messages.
+  assert.match(how('q4'), /close-out report shows each query and when it was answered/);
+  assert.doesNotMatch(how('q4'), /appear in the close-out report/);
+});

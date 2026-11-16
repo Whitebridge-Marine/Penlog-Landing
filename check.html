@@ -240,7 +240,7 @@
         <noscript>
             <p class="text-gray-700">This check needs JavaScript. You can still <a href="/" class="text-teal-600 underline">request a demo on our homepage</a>.</p>
         </noscript>
-        <div id="check-root" aria-live="polite"></div>
+        <div id="check-root" class="ph-no-capture" aria-live="polite"></div>
     </main>
 
     <style>
@@ -326,7 +326,7 @@
                       
           
 <!-- Request Access Modal -->
-<div id="requestAccessModal" class="modal-overlay" style="display: none;">
+<div id="requestAccessModal" class="modal-overlay ph-no-capture" style="display: none;">
   <div class="modal-container">
     <!-- Close button -->
     <button class="modal-close" onclick="closeRequestModal()">
@@ -359,18 +359,18 @@
       <div class="form-row">
         <div class="form-group">
           <label for="fullName">Full Name *</label>
-          <input type="text" id="fullName" name="name" required placeholder="John Smith">
+          <input type="text" id="fullName" name="name" maxlength="100" required placeholder="John Smith">
         </div>
 
         <div class="form-group">
           <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required placeholder="john@cruiseline.com">
+          <input type="email" id="email" name="email" maxlength="120" required placeholder="john@cruiseline.com">
         </div>
       </div>
 
       <div class="form-group">
         <label for="company">Company / Cruise Line *</label>
-        <input type="text" id="company" name="company" required placeholder="e.g., P&O Cruises, Carnival, Royal Caribbean">
+        <input type="text" id="company" name="company" maxlength="200" required placeholder="e.g., P&O Cruises, Carnival, Royal Caribbean">
       </div>
 
       <div class="form-group">
@@ -389,7 +389,7 @@
 
       <div class="form-group">
         <label for="drydockDate">Next Drydock Date (Optional)</label>
-        <input type="text" id="drydockDate" name="drydock_date" placeholder="e.g., February 2026, Q3 2025">
+        <input type="text" id="drydockDate" name="drydock_date" maxlength="50" placeholder="e.g., February 2026, Q3 2025">
       </div>
 
       <div class="form-group">
