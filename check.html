@@ -243,6 +243,14 @@
         <div id="check-root" class="ph-no-capture" aria-live="polite"></div>
     </main>
 
+    <div id="checkLightbox" class="fixed inset-0 bg-black/80 z-[10000] items-center justify-center p-4" style="display:none" role="dialog" aria-modal="true" aria-label="Enlarged picture">
+        <figure class="max-w-5xl w-full">
+            <img id="checkLightboxImg" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg bg-white">
+            <figcaption id="checkLightboxCaption" class="text-gray-200 text-sm mt-2 text-center"></figcaption>
+        </figure>
+        <button id="checkLightboxClose" type="button" onclick="closeLightbox()" class="absolute top-4 right-4 text-white bg-black/50 rounded-full w-11 h-11 text-2xl leading-none" aria-label="Close">&times;</button>
+    </div>
+
     <style>
         .check-option { min-height: 44px; }
         .check-option[aria-pressed="true"] { border-color: #0d9488; background: #f0fdfa; }
@@ -761,7 +769,14 @@ function gapCard(g) {
     part('Your answer', g.answerLabel),
     part('Why it matters', g.why),
     part('How PenLog closes it', g.how),
-    el('a', { href: g.link, class: 'inline-block mt-3 text-teal-600 hover:text-teal-700 text-sm font-medium', text: 'See how →' })
+    g.image
+      ? el('button', { type: 'button', class: 'block w-full mt-4 text-left group', 'aria-label': 'Enlarge: ' + g.image.alt,
+          onclick: function () { openLightbox(g.image, g.id); } }, [
+          el('img', { src: g.image.src, alt: g.image.alt, loading: 'lazy',
+            class: 'w-full max-h-64 object-cover object-top rounded-md border border-gray-200 group-hover:border-teal-400 transition' }),
+          el('span', { class: 'block mt-1 text-xs text-gray-500', text: 'From a sample dock · tap to enlarge' })
+        ])
+      : el('a', { href: g.link, class: 'inline-block mt-3 text-teal-600 hover:text-teal-700 text-sm font-medium', text: 'See how →' })
   ]);
 }
 
@@ -792,6 +807,12 @@ function renderResult() {
     el('h1', { class: 'text-3xl md:text-4xl font-bold mb-4 outline-none ' + EXPOSURE_STYLE[r.exposure], tabindex: '-1', 'data-focus': '1', text: 'Exposure: ' + r.exposure }),
     el('p', { class: 'text-lg text-gray-700', text: C.EXPOSURE_TEXT[r.exposure] })
   ].concat(body).concat([
+    C.SAMPLE_REPORT
+      ? el('p', { class: 'mt-8' }, [el('a', { href: C.SAMPLE_REPORT, target: '_blank', rel: 'noopener',
+          class: 'text-teal-600 hover:text-teal-700 font-medium underline underline-offset-4',
+          text: 'See a sample close-out report (PDF) →',
+          onclick: function () { track('check_sample_report_opened', { exposure: r.exposure }); } })])
+      : null,
     el('div', { class: 'bg-navy-50 border border-navy-100 rounded-lg p-6 mt-10 flex flex-col md:flex-row gap-6' }, ctas),
     el('div', { class: 'mt-8 flex flex-col sm:flex-row sm:justify-between gap-3 text-sm' }, [
       el('button', { type: 'button', class: 'text-left text-teal-600 hover:text-teal-700', text: '↻ Retake the check',
@@ -799,6 +820,22 @@ function renderResult() {
       el('p', { class: 'text-gray-500', text: 'This is a self-assessment, not a compliance audit.' })
     ])
   ]));
+}
+
+// ---- Picture viewer for gap cards ----
+function openLightbox(image, qid) {
+  var box = document.getElementById('checkLightbox');
+  var img = document.getElementById('checkLightboxImg');
+  img.src = image.src; img.alt = image.alt;
+  document.getElementById('checkLightboxCaption').textContent = image.alt;
+  box.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  document.getElementById('checkLightboxClose').focus();
+  track('check_image_opened', { question: qid });
+}
+function closeLightbox() {
+  document.getElementById('checkLightbox').style.display = 'none';
+  document.body.style.overflow = 'auto';
 }
 
 // ---- Request form (markup copied from the homepage modal) ----
@@ -889,9 +926,10 @@ async function submitAccessRequest(event) {
 
 document.addEventListener('click', function (event) {
   if (event.target === document.getElementById('requestAccessModal')) closeRequestModal();
+  if (event.target === document.getElementById('checkLightbox')) closeLightbox();
 });
 document.addEventListener('keydown', function (event) {
-  if (event.key === 'Escape') closeRequestModal();
+  if (event.key === 'Escape') { closeLightbox(); closeRequestModal(); }
 });
 
 renderIntro();

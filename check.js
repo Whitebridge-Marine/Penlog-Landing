@@ -21,7 +21,8 @@
       gap: {
         why: 'An open A-class penetration that nobody knows about is a fire boundary that isn’t there. On a busy dock, with hot work nearby, hours matter.',
         how: 'Contractors log each opening on their phone with a photo; it appears on your dashboard at once.',
-        link: '/#how-it-works'
+        link: '/#how-it-works',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -35,7 +36,8 @@
       gap: {
         why: 'The duty officer and the yard safety office need today’s open boundaries, not last week’s spreadsheet. Without a daily list, fire risk is managed from memory.',
         how: 'The daily Fire Status sheet lists every open penetration, A-60s highlighted, with how long it has been open and which contractor opened it.',
-        link: '/#fire-status'
+        link: '/#fire-status',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -49,7 +51,8 @@
       gap: {
         why: 'Once a seal is painted over or boxed in, the photo is the only evidence of what was done. Photos scattered across phones and chat groups are hard to match to a penetration afterwards.',
         how: 'Opening and closing photos are held on each penetration’s record, timestamped.',
-        link: '/#features'
+        link: '/#features',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -63,7 +66,8 @@
       gap: {
         why: 'A self-certified seal is only as good as the last shift’s pressure to finish. An independent check is what turns a contractor’s word into evidence.',
         how: 'Verify rounds: a supervisor confirms or queries each seal on site. A query is a message sent inside PenLog to the contractor, who replies from their own link; query and reply stay on that penetration’s record, and the close-out report shows each query and when it was answered. No phone calls or WhatsApp threads to chase.',
-        link: '/#how-it-works'
+        link: '/#how-it-works',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -77,7 +81,8 @@
       gap: {
         why: 'When a seal fails inspection, “the insulation contractor” is not an answer. Knowing the person makes rework fast and accountability real.',
         how: 'Each contractor works from their own personal link, so every record names the person.',
-        link: '/#features'
+        link: '/#features',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -91,7 +96,8 @@
       gap: {
         why: 'A shared spreadsheet can be changed by anyone, without a trace. That makes it hard to rely on as a record when it matters most.',
         how: 'Every change is written to the audit trail: who, what, when.',
-        link: '/#features'
+        link: '/#features',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -105,7 +111,8 @@
       gap: {
         why: 'An open penetration that sails with the ship is a gap in a fire division at sea. Spreadsheets make it easy for one row to be filtered or scrolled out of sight.',
         how: 'The close-out report lists every outstanding item, and they cannot be hidden.',
-        link: '/#features'
+        link: '/#features',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     },
     {
@@ -119,7 +126,8 @@
       gap: {
         why: 'Evidence assembled after the dock, from photos, emails and spreadsheets, costs days and still leaves gaps. Under ISM, the record is part of the job.',
         how: 'The close-out report and Excel evidence package are produced from the records in one step.',
-        link: '/#features'
+        link: '/#features',
+        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
       }
     }
   ];
@@ -137,6 +145,9 @@
 
   var NO_GAPS_TEXT = 'You reported no gaps: a well-controlled dock. If proving it still takes your team days of spreadsheets and photo hunting, a demo will show how PenLog cuts that work.';
 
+  // Current sample close-out report from the sample dock; null hides the link.
+  var SAMPLE_REPORT = null;
+
   var MAX = QUESTIONS.reduce(function (s, q) { return s + 2 * q.weight; }, 0);
 
   function scoreAnswers(answers) {
@@ -148,7 +159,7 @@
       if (q.weight === 2 && opt.score === 2) fullGapOnDouble = true;
       if (opt.score > 0) {
         gaps.push({ id: q.id, order: order, answerLabel: opt.label, score: opt.score, weight: q.weight,
-          why: q.gap.why, how: q.gap.how, link: q.gap.link });
+          why: q.gap.why, how: q.gap.how, link: q.gap.link, image: q.gap.image || null });
       }
     });
     gaps.sort(function (a, b) { return (b.weight - a.weight) || (a.order - b.order); });
@@ -181,7 +192,7 @@
     return parts.join(' · ').slice(0, 1000);
   }
 
-  var api = { QUESTIONS: QUESTIONS, QUALIFIERS: QUALIFIERS, EXPOSURE_TEXT: EXPOSURE_TEXT, NO_GAPS_TEXT: NO_GAPS_TEXT,
+  var api = { QUESTIONS: QUESTIONS, QUALIFIERS: QUALIFIERS, EXPOSURE_TEXT: EXPOSURE_TEXT, NO_GAPS_TEXT: NO_GAPS_TEXT, SAMPLE_REPORT: SAMPLE_REPORT,
     scoreAnswers: scoreAnswers, primaryCta: primaryCta, assessmentSummary: assessmentSummary };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.PenLogCheck = api;

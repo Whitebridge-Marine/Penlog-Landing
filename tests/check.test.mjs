@@ -124,3 +124,16 @@ test('cards claim only what the product does (review 2026-11-16)', () => {
   assert.match(how('q4'), /close-out report shows each query and when it was answered/);
   assert.doesNotMatch(how('q4'), /appear in the close-out report/);
 });
+
+test('gap cards carry their picture, and the sample report is offered', () => {
+  const all = Object.fromEntries(C.QUESTIONS.map((q) => [q.id, 2]));
+  const gaps = C.scoreAnswers(answers(all)).gaps;
+  for (const g of gaps) {
+    assert.ok('image' in g, `${g.id} gap has no image key`);
+    if (g.image) {
+      assert.match(g.image.src, /^\/img\/check\/[a-z0-9-]+\.(png|jpg|webp)$/);
+      assert.ok(g.image.alt && g.image.alt.length > 10, `${g.id} image needs real alt text`);
+    }
+  }
+  assert.ok('SAMPLE_REPORT' in C);
+});
