@@ -137,3 +137,15 @@ test('gap cards carry their picture, and the sample report is offered', () => {
   }
   assert.ok('SAMPLE_REPORT' in C);
 });
+
+test('every gap card has a picture on disk, and the sample report exists', async () => {
+  const { existsSync } = await import('node:fs');
+  const { fileURLToPath } = await import('node:url');
+  const root = fileURLToPath(new URL('..', import.meta.url));
+  for (const q of C.QUESTIONS) {
+    assert.ok(q.gap.image, `${q.id} has no picture`);
+    assert.ok(existsSync(root + q.gap.image.src.slice(1)), `${q.id} picture missing: ${q.gap.image.src}`);
+  }
+  assert.ok(C.SAMPLE_REPORT, 'no sample report');
+  assert.ok(existsSync(root + C.SAMPLE_REPORT.slice(1)), `sample report missing: ${C.SAMPLE_REPORT}`);
+});

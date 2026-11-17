@@ -22,7 +22,7 @@
         why: 'An open A-class penetration that nobody knows about is a fire boundary that isn’t there. On a busy dock, with hot work nearby, hours matter.',
         how: 'Contractors log each opening on their phone with a photo; it appears on your dashboard at once.',
         link: '/#how-it-works',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q1-new-pen.png', alt: 'A contractor logging a new penetration on their phone, and the new pens highlighted on the supervisor’s dashboard' }
       }
     },
     {
@@ -37,7 +37,7 @@
         why: 'The duty officer and the yard safety office need today’s open boundaries, not last week’s spreadsheet. Without a daily list, fire risk is managed from memory.',
         how: 'The daily Fire Status sheet lists every open penetration, A-60s highlighted, with how long it has been open and which contractor opened it.',
         link: '/#fire-status',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q2-fire-status.png', alt: 'The daily Fire Status sheet: every open penetration by deck and zone, A-60 boundaries highlighted, with open-since dates and contractors' }
       }
     },
     {
@@ -52,7 +52,7 @@
         why: 'Once a seal is painted over or boxed in, the photo is the only evidence of what was done. Photos scattered across phones and chat groups are hard to match to a penetration afterwards.',
         how: 'Opening and closing photos are held on each penetration’s record, timestamped.',
         link: '/#features',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q3-photos.png', alt: 'A close-out report record with the opening and closing photos of one penetration, each with its time, and who opened, sealed and verified it' }
       }
     },
     {
@@ -67,7 +67,7 @@
         why: 'A self-certified seal is only as good as the last shift’s pressure to finish. An independent check is what turns a contractor’s word into evidence.',
         how: 'Verify rounds: a supervisor confirms or queries each seal on site. A query is a message sent inside PenLog to the contractor, who replies from their own link; query and reply stay on that penetration’s record, and the close-out report shows each query and when it was answered. No phone calls or WhatsApp threads to chase.',
         link: '/#how-it-works',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q4-verify-query.png', alt: 'A supervisor’s Verify round with one seal queried, and the query and the contractor’s reply on the contractor’s phone' }
       }
     },
     {
@@ -82,7 +82,7 @@
         why: 'When a seal fails inspection, “the insulation contractor” is not an answer. Knowing the person makes rework fast and accountability real.',
         how: 'Each contractor works from their own personal link, so every record names the person.',
         link: '/#features',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q5-personal-links.png', alt: 'The contractor links page: one personal link per named person, each under their company' }
       }
     },
     {
@@ -97,7 +97,7 @@
         why: 'A shared spreadsheet can be changed by anyone, without a trace. That makes it hard to rely on as a record when it matters most.',
         how: 'Every change is written to the audit trail: who, what, when.',
         link: '/#features',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q6-activity-history.png', alt: 'A penetration’s activity history: opened and sealed by the contractor, verified by the supervisor, each with name and time' }
       }
     },
     {
@@ -112,7 +112,7 @@
         why: 'An open penetration that sails with the ship is a gap in a fire division at sea. Spreadsheets make it easy for one row to be filtered or scrolled out of sight.',
         how: 'The close-out report lists every outstanding item, and they cannot be hidden.',
         link: '/#features',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q7-outstanding.png', alt: 'The close-out report’s Outstanding Items section, listing every penetration not sealed and verified' }
       }
     },
     {
@@ -127,7 +127,7 @@
         why: 'Evidence assembled after the dock, from photos, emails and spreadsheets, costs days and still leaves gaps. Under ISM, the record is part of the job.',
         how: 'The close-out report and Excel evidence package are produced from the records in one step.',
         link: '/#features',
-        image: null  // set once the sample-dock picture exists: { src: '/img/check/qN-....png', alt: '...' }
+        image: { src: '/img/check/q8-closeout-cover.png', alt: 'The cover of the PenLog Penetration Close-Out Report' }
       }
     }
   ];
@@ -146,7 +146,7 @@
   var NO_GAPS_TEXT = 'You reported no gaps: a well-controlled dock. If proving it still takes your team days of spreadsheets and photo hunting, a demo will show how PenLog cuts that work.';
 
   // Current sample close-out report from the sample dock; null hides the link.
-  var SAMPLE_REPORT = null;
+  var SAMPLE_REPORT = '/img/check/PenLog-Sample-Close-Out-Report.pdf';
 
   var MAX = QUESTIONS.reduce(function (s, q) { return s + 2 * q.weight; }, 0);
 
